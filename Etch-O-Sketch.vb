@@ -47,17 +47,28 @@ Public Class EtchOSketchFrom
         Me.Text = $"({e.X}, {e.Y}) Button: {e.Button}"
     End Sub
 
-    Private Sub ExitButton_Click(sender As Object, e As EventArgs) Handles ExitButton.Click
+    Private Sub ExitButton_Click(sender As Object, e As EventArgs) Handles ExitButton.Click, ExitToolStripMenuItem.Click, ExitToolStripMenuItem1.Click
         Me.Close()
     End Sub
 
-    Private Sub ClearButton_Click(sender As Object, e As EventArgs) Handles ClearButton.Click
+    Private Sub ClearButton_Click(sender As Object, e As EventArgs) Handles ClearButton.Click, ClearToolStripMenuItem.Click, ClearToolStripMenuItem1.Click
         DrawingPictureBox.Refresh()
         SetDefaults()
+    End Sub
+    Private Sub ForegroundToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SelectColorToolStripMenuItem1.Click, SelectColorButton.Click, SelectColorToolStripMenuItem.Click
+
+        ForegroundColor(ColorDialog.Color, True)
+        If ColorDialog.ShowDialog() = DialogResult.OK Then
+            ForegroundColor(ColorDialog.Color, True)
+        End If
     End Sub
 
     Private Sub GraphicsForm_Load(sender As Object, e As EventArgs) Handles Me.Load
         SetDefaults()
+
+    End Sub
+
+    Private Sub SelectColorToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles SelectColorToolStripMenuItem1.Click
 
     End Sub
 End Class
