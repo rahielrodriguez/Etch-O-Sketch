@@ -130,7 +130,6 @@ Public Class EtchOSketchFrom
     Private Sub DrawWaveformsButton_Click(sender As Object, e As EventArgs) Handles DrawWaveformsButton.Click, DrawWaveformsToolStripMenuItem.Click, DrawWaveformsToolStripMenuItem1.Click
         DrawSineWave()
         DrawCosineWave()
-        DrawTangentWave()
 
     End Sub
 
