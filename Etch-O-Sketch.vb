@@ -15,5 +15,49 @@ Public Class EtchOSketchFrom
         Return currentColor
 
     End Function
+    Sub MouseDraw(newX As Integer, newY As Integer, draw As Boolean)
+        Dim g As Graphics = DrawingPictureBox.CreateGraphics
+        Dim pen As New Pen(ForegroundColor())
+        Static oldX As Integer, oldY As Integer
 
+        If draw Then
+            g.DrawLine(pen, oldX, oldY, newX, newY)
+        End If
+
+        oldX = newX
+        oldY = newY
+
+        pen.Dispose()
+        g.Dispose()
+    End Sub
+    Private Sub GraphicsForm_MouseMove(sender As Object, e As MouseEventArgs) Handles Me.MouseMove
+
+    End Sub
+
+    Private Sub DrawingPictureBox_MouseMove(sender As Object, e As MouseEventArgs) Handles DrawingPictureBox.MouseMove
+        Me.Text = $"({e.X}, {e.Y}) Button: {e.Button}"
+        If e.Button = MouseButtons.Left Then
+            MouseDraw(e.X, e.Y, True)
+        Else
+            MouseDraw(e.X, e.Y, False)
+        End If
+    End Sub
+
+    Private Sub DrawingPictureBox_MouseDown(sender As Object, e As MouseEventArgs) Handles DrawingPictureBox.MouseDown
+        Me.Text = $"({e.X}, {e.Y}) Button: {e.Button}"
+    End Sub
+
+    Private Sub ExitButton_Click(sender As Object, e As EventArgs) Handles ExitButton.Click
+        Me.Close()
+    End Sub
+
+    Private Sub ClearButton_Click(sender As Object, e As EventArgs) Handles ClearButton.Click
+        DrawingPictureBox.Refresh()
+        SetDefaults()
+    End Sub
+
+    Private Sub GraphicsForm_Load(sender As Object, e As EventArgs) Handles Me.Load
+        SetDefaults()
+
+    End Sub
 End Class

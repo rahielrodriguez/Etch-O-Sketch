@@ -23,7 +23,7 @@ Partial Class EtchOSketchFrom
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.DrawingPictureBox = New System.Windows.Forms.PictureBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.ExitButton = New System.Windows.Forms.Button()
         Me.ClearButton = New System.Windows.Forms.Button()
@@ -48,23 +48,24 @@ Partial Class EtchOSketchFrom
         Me.HelpToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolTip = New System.Windows.Forms.ToolTip(Me.components)
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DrawingPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.ContextMenu.SuspendLayout()
         Me.TopMenu.SuspendLayout()
         Me.SuspendLayout()
         '
-        'PictureBox1
+        'DrawingPictureBox
         '
-        Me.PictureBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.DrawingPictureBox.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.PictureBox1.Location = New System.Drawing.Point(0, 31)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(711, 310)
-        Me.PictureBox1.TabIndex = 0
-        Me.PictureBox1.TabStop = False
-        Me.ToolTip.SetToolTip(Me.PictureBox1, "Displays a Sine Wave, Cosine Wave and a Tangent Wave if Draw Waveforms Button is " &
+        Me.DrawingPictureBox.BackColor = System.Drawing.SystemColors.Window
+        Me.DrawingPictureBox.Location = New System.Drawing.Point(0, 31)
+        Me.DrawingPictureBox.Name = "DrawingPictureBox"
+        Me.DrawingPictureBox.Size = New System.Drawing.Size(711, 310)
+        Me.DrawingPictureBox.TabIndex = 0
+        Me.DrawingPictureBox.TabStop = False
+        Me.ToolTip.SetToolTip(Me.DrawingPictureBox, "Displays a Sine Wave, Cosine Wave and a Tangent Wave if Draw Waveforms Button is " &
         "presses. Also by presing the left button of your mouse or mousepad you can draw " &
         "along the Picture Box.")
         '
@@ -252,11 +253,11 @@ Partial Class EtchOSketchFrom
         Me.ClientSize = New System.Drawing.Size(711, 457)
         Me.Controls.Add(Me.TopMenu)
         Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.PictureBox1)
+        Me.Controls.Add(Me.DrawingPictureBox)
         Me.MainMenuStrip = Me.TopMenu
         Me.Name = "EtchOSketchFrom"
         Me.Text = "Etch-O-Sketch"
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DrawingPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.ContextMenu.ResumeLayout(False)
         Me.TopMenu.ResumeLayout(False)
@@ -266,7 +267,7 @@ Partial Class EtchOSketchFrom
 
     End Sub
 
-    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents DrawingPictureBox As PictureBox
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents ExitButton As Button
     Friend WithEvents ClearButton As Button
