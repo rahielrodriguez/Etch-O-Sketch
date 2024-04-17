@@ -76,13 +76,13 @@ Partial Class EtchOSketchFrom
         Me.ContextMenu.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.ContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.EditToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.ContextMenu.Name = "ContextMenuStrip"
-        Me.ContextMenu.Size = New System.Drawing.Size(211, 104)
+        Me.ContextMenu.Size = New System.Drawing.Size(111, 76)
         '
         'FileToolStripMenuItem
         '
         Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExitToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
-        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(210, 24)
+        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(110, 24)
         Me.FileToolStripMenuItem.Text = "File"
         '
         'ExitToolStripMenuItem
@@ -95,7 +95,7 @@ Partial Class EtchOSketchFrom
         '
         Me.EditToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SelectColorToolStripMenuItem, Me.DrawWaveformsToolStripMenuItem, Me.ClearToolStripMenuItem})
         Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
-        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(210, 24)
+        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(110, 24)
         Me.EditToolStripMenuItem.Text = "Edit"
         '
         'SelectColorToolStripMenuItem
@@ -120,7 +120,7 @@ Partial Class EtchOSketchFrom
         '
         Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutToolStripMenuItem})
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
-        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(210, 24)
+        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(110, 24)
         Me.HelpToolStripMenuItem.Text = "Help"
         '
         'AboutToolStripMenuItem

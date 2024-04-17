@@ -1,6 +1,11 @@
 ﻿Option Strict On
 Option Explicit On
 Public Class EtchOSketchFrom
+    'TODO
+    '[ ]Draw Sine Wave
+    '[ ]Draw Cosine Wave
+    '[ ]Draw Tangent Wave
+    '[ ]When Clear is pressed the form will shake
     Sub SetDefaults()
         ForegroundColor(Color.Black, True)
 
@@ -15,6 +20,82 @@ Public Class EtchOSketchFrom
         Return currentColor
 
     End Function
+    Sub DrawSineWave()
+
+        Dim g As Graphics = DrawingPictureBox.CreateGraphics
+        Dim pen As New Pen(Color.Red)
+
+        'Set width at 360
+        Dim xMax As Single = 360
+        'calculate the x scale factor
+        Dim xScale As Single = DrawingPictureBox.Width / xMax
+        'Set height to 100 for scale
+        Dim yMax As Single = 100
+        'calculate the y scale factor and make up positive y
+        Dim yScale As Single = CSng(DrawingPictureBox.Height / 2) / yMax * -1
+
+        Dim oldX#, oldY#, newX#, newY#
+        Dim angle#
+
+        'apply the scaling settings 
+        g.ScaleTransform(xScale, yScale)
+
+        'set the origin of the waveform at the middle of y
+        g.TranslateTransform(0, yMax * -1)
+
+        For newX = 0 To 360
+            'convert current X from degrees to radians
+            angle = (Math.PI / 180) * newX
+            'find current y 
+            newY = (yMax - 10) * Math.Sin(angle)
+            'draw current line segment
+            g.DrawLine(pen, CInt(oldX), CInt(oldY), CInt(newX), CInt(newY))
+            'store values for start of next line segment
+            oldX = newX
+            oldY = newY
+        Next
+
+        pen.Dispose()
+        g.Dispose()
+    End Sub
+    Sub DrawCosineWave()
+
+        Dim g As Graphics = DrawingPictureBox.CreateGraphics
+        Dim pen As New Pen(Color.Blue)
+
+        'Set width at 360
+        Dim xMax As Single = 360
+        'calculate the x scale factor
+        Dim xScale As Single = DrawingPictureBox.Width / xMax
+        'Set height to 100 for scale
+        Dim yMax As Single = 100
+        'calculate the y scale factor and make up positive y
+        Dim yScale As Single = CSng(DrawingPictureBox.Height / 2) / yMax * -1
+
+        Dim oldX#, oldY#, newX#, newY#
+        Dim angle#
+
+        'apply the scale 
+        g.ScaleTransform(xScale, yScale)
+
+        'set the origin to the y middle of the picture box
+        g.TranslateTransform(0, yMax * -1)
+
+        For newX = 0 To 360
+            'convert current X from degrees to radians
+            angle = (Math.PI / 180) * newX
+            'find current y 
+            newY = (yMax - 10) * Math.Cos(angle)
+            'draw current line segment
+            g.DrawLine(pen, CInt(oldX), CInt(oldY), CInt(newX), CInt(newY))
+            'store values for start of next line segment
+            oldX = newX
+            oldY = newY
+        Next
+
+        pen.Dispose()
+        g.Dispose()
+    End Sub
     Sub MouseDraw(newX As Integer, newY As Integer, draw As Boolean)
         Dim g As Graphics = DrawingPictureBox.CreateGraphics
         Dim pen As New Pen(ForegroundColor())
@@ -46,6 +127,12 @@ Public Class EtchOSketchFrom
     Private Sub DrawingPictureBox_MouseDown(sender As Object, e As MouseEventArgs) Handles DrawingPictureBox.MouseDown
         Me.Text = $"({e.X}, {e.Y}) Button: {e.Button}"
     End Sub
+    Private Sub DrawWaveformsButton_Click(sender As Object, e As EventArgs) Handles DrawWaveformsButton.Click, DrawWaveformsToolStripMenuItem.Click, DrawWaveformsToolStripMenuItem1.Click
+        DrawSineWave()
+        DrawCosineWave()
+        DrawTangentWave()
+
+    End Sub
 
     Private Sub ExitButton_Click(sender As Object, e As EventArgs) Handles ExitButton.Click, ExitToolStripMenuItem.Click, ExitToolStripMenuItem1.Click
         Me.Close()
@@ -71,4 +158,5 @@ Public Class EtchOSketchFrom
     Private Sub SelectColorToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles SelectColorToolStripMenuItem1.Click
 
     End Sub
+
 End Class
