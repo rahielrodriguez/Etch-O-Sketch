@@ -192,6 +192,17 @@ Public Class EtchOSketchFrom
     Private Sub DrawingPictureBox_MouseDown(sender As Object, e As MouseEventArgs) Handles DrawingPictureBox.MouseDown
         Me.Text = $"({e.X}, {e.Y}) Button: {e.Button}"
     End Sub
+    Sub ShakeWhenClear()
+        Dim shakeCount As Integer = 0
+        If shakeCount >= 1000 Then
+            shakeCount = 0
+        End If
+        Do Until shakeCount = 1000
+            Me.Left -= 20
+            Me.Left += 20
+            shakeCount += 1
+        Loop
+    End Sub
     Private Sub DrawWaveformsButton_Click(sender As Object, e As EventArgs) Handles DrawWaveformsButton.Click, DrawWaveformsToolStripMenuItem.Click, DrawWaveformsToolStripMenuItem1.Click
         DrawGrid()
         DrawSineWave()
@@ -204,6 +215,7 @@ Public Class EtchOSketchFrom
     End Sub
 
     Private Sub ClearButton_Click(sender As Object, e As EventArgs) Handles ClearButton.Click, ClearToolStripMenuItem.Click, ClearToolStripMenuItem1.Click
+        ShakeWhenClear()
         DrawingPictureBox.Refresh()
         SetDefaults()
     End Sub
