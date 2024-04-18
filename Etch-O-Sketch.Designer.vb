@@ -101,19 +101,19 @@ Partial Class EtchOSketchFrom
         'SelectColorToolStripMenuItem
         '
         Me.SelectColorToolStripMenuItem.Name = "SelectColorToolStripMenuItem"
-        Me.SelectColorToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.SelectColorToolStripMenuItem.Size = New System.Drawing.Size(205, 26)
         Me.SelectColorToolStripMenuItem.Text = "Select Color"
         '
         'DrawWaveformsToolStripMenuItem
         '
         Me.DrawWaveformsToolStripMenuItem.Name = "DrawWaveformsToolStripMenuItem"
-        Me.DrawWaveformsToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.DrawWaveformsToolStripMenuItem.Size = New System.Drawing.Size(205, 26)
         Me.DrawWaveformsToolStripMenuItem.Text = "Draw Waveforms"
         '
         'ClearToolStripMenuItem
         '
         Me.ClearToolStripMenuItem.Name = "ClearToolStripMenuItem"
-        Me.ClearToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.ClearToolStripMenuItem.Size = New System.Drawing.Size(205, 26)
         Me.ClearToolStripMenuItem.Text = "Clear"
         '
         'HelpToolStripMenuItem
@@ -149,7 +149,7 @@ Partial Class EtchOSketchFrom
         Me.ExitButton.Name = "ExitButton"
         Me.ExitButton.Size = New System.Drawing.Size(147, 71)
         Me.ExitButton.TabIndex = 3
-        Me.ExitButton.Text = "Exit"
+        Me.ExitButton.Text = "E&xit"
         Me.ToolTip.SetToolTip(Me.ExitButton, "Closes the program")
         Me.ExitButton.UseVisualStyleBackColor = True
         '
@@ -159,7 +159,7 @@ Partial Class EtchOSketchFrom
         Me.ClearButton.Name = "ClearButton"
         Me.ClearButton.Size = New System.Drawing.Size(147, 71)
         Me.ClearButton.TabIndex = 2
-        Me.ClearButton.Text = "Clear"
+        Me.ClearButton.Text = "&Clear"
         Me.ToolTip.SetToolTip(Me.ClearButton, "Clears all the picture box")
         Me.ClearButton.UseVisualStyleBackColor = True
         '
@@ -169,7 +169,7 @@ Partial Class EtchOSketchFrom
         Me.SelectColorButton.Name = "SelectColorButton"
         Me.SelectColorButton.Size = New System.Drawing.Size(147, 71)
         Me.SelectColorButton.TabIndex = 1
-        Me.SelectColorButton.Text = "Select Color"
+        Me.SelectColorButton.Text = "&Select Color"
         Me.ToolTip.SetToolTip(Me.SelectColorButton, "By pressing this button a color selector will be displayed in order to change the" &
         " color of the drawing")
         Me.SelectColorButton.UseVisualStyleBackColor = True
@@ -180,7 +180,7 @@ Partial Class EtchOSketchFrom
         Me.DrawWaveformsButton.Name = "DrawWaveformsButton"
         Me.DrawWaveformsButton.Size = New System.Drawing.Size(147, 71)
         Me.DrawWaveformsButton.TabIndex = 0
-        Me.DrawWaveformsButton.Text = "Draw Waveforms"
+        Me.DrawWaveformsButton.Text = "&Draw Waveforms"
         Me.ToolTip.SetToolTip(Me.DrawWaveformsButton, "By pressing this button a Sine Wave, a Cosine Wave and a Tangent Wave will be dis" &
         "played along the picture box")
         Me.DrawWaveformsButton.UseVisualStyleBackColor = True
