@@ -1,18 +1,14 @@
 ﻿Option Strict On
 Option Explicit On
 Public Class EtchOSketchFrom
-    'TODO
-    '[ ]Draw Sine Wave
-    '[ ]Draw Cosine Wave
-    '[ ]Draw Tangent Wave
-    '[ ]When Clear is pressed the form will shake
     Sub SetDefaults()
+        'Sets Initial Color of mouse drawing as black color.
         ForegroundColor(Color.Black, True)
 
     End Sub
     Function ForegroundColor(Optional newColor As Color = Nothing, Optional update As Boolean = False) As Color
         Static currentColor As Color
-
+        'Allows to update the color selected to draw
         If update Then
             currentColor = newColor
         End If
@@ -27,12 +23,12 @@ Public Class EtchOSketchFrom
         Const TOP = 0%, LEFT = 0%
         Dim Bottom As Integer = DrawingPictureBox.Height
         Dim Right As Integer = DrawingPictureBox.Width
-
+        'Sets a scale for the grids
         Dim xIncrement = DrawingPictureBox.Width \ 10
         Dim yIncrement = DrawingPictureBox.Height \ 8
 
         'vertical lines
-
+        'Apply Scales
         For x = xIncrement To Right - xIncrement Step xIncrement
             g.DrawLine(pen, x, TOP, x, Bottom)
         Next
@@ -149,6 +145,7 @@ Public Class EtchOSketchFrom
             'find current y 
             newY = (yMax - 10) * Math.Tan(angle)
             'draw current line segment
+            'If it cannot draw something from the waveform, skip and continue operation to eliminate errors.
             Try
                 g.DrawLine(pen, CInt(oldX), CInt(oldY), CInt(newX), CInt(newY))
             Catch ex As Exception
@@ -166,22 +163,21 @@ Public Class EtchOSketchFrom
         Dim pen As New Pen(ForegroundColor())
         Static oldX As Integer, oldY As Integer
 
+        'Alows to draw along the picture box
         If draw Then
             g.DrawLine(pen, oldX, oldY, newX, newY)
         End If
-
+        'Store calues for start of next line segment
         oldX = newX
         oldY = newY
 
         pen.Dispose()
         g.Dispose()
     End Sub
-    Private Sub GraphicsForm_MouseMove(sender As Object, e As MouseEventArgs) Handles Me.MouseMove
-
-    End Sub
 
     Private Sub DrawingPictureBox_MouseMove(sender As Object, e As MouseEventArgs) Handles DrawingPictureBox.MouseMove
         Me.Text = $"({e.X}, {e.Y}) Button: {e.Button}"
+        'Allows to draw and follow mouse movement.
         If e.Button = MouseButtons.Left Then
             MouseDraw(e.X, e.Y, True)
         Else
@@ -190,14 +186,16 @@ Public Class EtchOSketchFrom
     End Sub
 
     Private Sub DrawingPictureBox_MouseDown(sender As Object, e As MouseEventArgs) Handles DrawingPictureBox.MouseDown
+        'Allows to draw only if left button of the mouse is being pressed
         Me.Text = $"({e.X}, {e.Y}) Button: {e.Button}"
     End Sub
     Sub ShakeWhenClear()
         Dim shakeCount As Integer = 0
-        If shakeCount >= 1000 Then
+        'If clear is pressed, it will move the form for certain amount of times.
+        If shakeCount >= 500 Then
             shakeCount = 0
         End If
-        Do Until shakeCount = 1000
+        Do Until shakeCount = 500
             Me.Left -= 20
             Me.Left += 20
             shakeCount += 1
@@ -221,6 +219,7 @@ Public Class EtchOSketchFrom
     End Sub
     Private Sub ForegroundToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SelectColorToolStripMenuItem1.Click, SelectColorButton.Click, SelectColorToolStripMenuItem.Click
 
+        'Allows to display the color dialog and change the color for drawing.
         ForegroundColor(ColorDialog.Color, True)
         If ColorDialog.ShowDialog() = DialogResult.OK Then
             ForegroundColor(ColorDialog.Color, True)
