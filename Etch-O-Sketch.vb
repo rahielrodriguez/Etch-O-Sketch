@@ -120,6 +120,47 @@ Public Class EtchOSketchFrom
         pen.Dispose()
         g.Dispose()
     End Sub
+    Sub DrawTangentWave()
+
+        Dim g As Graphics = DrawingPictureBox.CreateGraphics
+        Dim pen As New Pen(Color.Green)
+
+        'Set width at 360
+        Dim xMax As Single = 360
+        'calculate the x scale factor
+        Dim xScale As Single = DrawingPictureBox.Width / xMax
+        'Set height to 100 for scale
+        Dim yMax As Single = 100
+        'calculate the y scale factor and make up positive y
+        Dim yScale As Single = CSng(DrawingPictureBox.Height / 2) / yMax * -1
+
+        Dim oldX#, oldY#, newX#, newY#
+        Dim angle#
+
+        'apply the scale 
+        g.ScaleTransform(xScale, yScale)
+
+        'set the origin to the y middle of the picture box
+        g.TranslateTransform(0, yMax * -1)
+
+        For newX = 0 To 360
+            'convert current X from degrees to radians
+            angle = (Math.PI / 180) * newX
+            'find current y 
+            newY = (yMax - 10) * Math.Tan(angle)
+            'draw current line segment
+            Try
+                g.DrawLine(pen, CInt(oldX), CInt(oldY), CInt(newX), CInt(newY))
+            Catch ex As Exception
+            End Try
+            'store values for start of next line segment
+            oldX = newX
+            oldY = newY
+        Next
+
+        pen.Dispose()
+        g.Dispose()
+    End Sub
     Sub MouseDraw(newX As Integer, newY As Integer, draw As Boolean)
         Dim g As Graphics = DrawingPictureBox.CreateGraphics
         Dim pen As New Pen(ForegroundColor())
@@ -155,6 +196,7 @@ Public Class EtchOSketchFrom
         DrawGrid()
         DrawSineWave()
         DrawCosineWave()
+        DrawTangentWave()
     End Sub
 
     Private Sub ExitButton_Click(sender As Object, e As EventArgs) Handles ExitButton.Click, ExitToolStripMenuItem.Click, ExitToolStripMenuItem1.Click
