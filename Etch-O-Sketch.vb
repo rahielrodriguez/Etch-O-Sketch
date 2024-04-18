@@ -1,4 +1,10 @@
-﻿Option Strict On
+﻿'Rahiel Rodriguez
+'RCET 0265
+'Spring 2024
+'Etch-O-Sketch
+'https://github.com/rahielrodriguez/Etch-O-Sketch.git
+
+Option Strict On
 Option Explicit On
 Public Class EtchOSketchFrom
     Sub SetDefaults()
