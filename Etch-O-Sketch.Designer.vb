@@ -49,10 +49,16 @@ Partial Class EtchOSketchFrom
         Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolTip = New System.Windows.Forms.ToolTip(Me.components)
         Me.ColorDialog = New System.Windows.Forms.ColorDialog()
+        Me.XTrackBar = New System.Windows.Forms.TrackBar()
+        Me.YTrackBar = New System.Windows.Forms.TrackBar()
+        Me.XLabel = New System.Windows.Forms.Label()
+        Me.YLabel = New System.Windows.Forms.Label()
         CType(Me.DrawingPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenu.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TopMenu.SuspendLayout()
+        CType(Me.XTrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.YTrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DrawingPictureBox
@@ -64,7 +70,7 @@ Partial Class EtchOSketchFrom
         Me.DrawingPictureBox.ContextMenuStrip = Me.ContextMenu
         Me.DrawingPictureBox.Location = New System.Drawing.Point(0, 31)
         Me.DrawingPictureBox.Name = "DrawingPictureBox"
-        Me.DrawingPictureBox.Size = New System.Drawing.Size(711, 310)
+        Me.DrawingPictureBox.Size = New System.Drawing.Size(1339, 310)
         Me.DrawingPictureBox.TabIndex = 0
         Me.DrawingPictureBox.TabStop = False
         Me.ToolTip.SetToolTip(Me.DrawingPictureBox, "Displays a Sine Wave, Cosine Wave and a Tangent Wave if Draw Waveforms Button is " &
@@ -136,7 +142,7 @@ Partial Class EtchOSketchFrom
         Me.GroupBox1.Controls.Add(Me.ClearButton)
         Me.GroupBox1.Controls.Add(Me.SelectColorButton)
         Me.GroupBox1.Controls.Add(Me.DrawWaveformsButton)
-        Me.GroupBox1.Location = New System.Drawing.Point(50, 347)
+        Me.GroupBox1.Location = New System.Drawing.Point(678, 347)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(619, 98)
         Me.GroupBox1.TabIndex = 1
@@ -192,7 +198,7 @@ Partial Class EtchOSketchFrom
         Me.TopMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem1, Me.EditToolStripMenuItem1, Me.HelpToolStripMenuItem1})
         Me.TopMenu.Location = New System.Drawing.Point(0, 0)
         Me.TopMenu.Name = "TopMenu"
-        Me.TopMenu.Size = New System.Drawing.Size(711, 28)
+        Me.TopMenu.Size = New System.Drawing.Size(1339, 30)
         Me.TopMenu.TabIndex = 3
         Me.TopMenu.Text = "MenuStrip1"
         '
@@ -200,7 +206,7 @@ Partial Class EtchOSketchFrom
         '
         Me.FileToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExitToolStripMenuItem1})
         Me.FileToolStripMenuItem1.Name = "FileToolStripMenuItem1"
-        Me.FileToolStripMenuItem1.Size = New System.Drawing.Size(46, 24)
+        Me.FileToolStripMenuItem1.Size = New System.Drawing.Size(46, 26)
         Me.FileToolStripMenuItem1.Text = "File"
         '
         'ExitToolStripMenuItem1
@@ -213,7 +219,7 @@ Partial Class EtchOSketchFrom
         '
         Me.EditToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SelectColorToolStripMenuItem1, Me.DrawWaveformsToolStripMenuItem1, Me.ClearToolStripMenuItem1})
         Me.EditToolStripMenuItem1.Name = "EditToolStripMenuItem1"
-        Me.EditToolStripMenuItem1.Size = New System.Drawing.Size(49, 24)
+        Me.EditToolStripMenuItem1.Size = New System.Drawing.Size(49, 26)
         Me.EditToolStripMenuItem1.Text = "Edit"
         '
         'SelectColorToolStripMenuItem1
@@ -238,7 +244,7 @@ Partial Class EtchOSketchFrom
         '
         Me.HelpToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutToolStripMenuItem1})
         Me.HelpToolStripMenuItem1.Name = "HelpToolStripMenuItem1"
-        Me.HelpToolStripMenuItem1.Size = New System.Drawing.Size(55, 24)
+        Me.HelpToolStripMenuItem1.Size = New System.Drawing.Size(55, 26)
         Me.HelpToolStripMenuItem1.Text = "Help"
         '
         'AboutToolStripMenuItem1
@@ -247,14 +253,50 @@ Partial Class EtchOSketchFrom
         Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(133, 26)
         Me.AboutToolStripMenuItem1.Text = "About"
         '
+        'XTrackBar
+        '
+        Me.XTrackBar.Location = New System.Drawing.Point(12, 368)
+        Me.XTrackBar.Name = "XTrackBar"
+        Me.XTrackBar.Size = New System.Drawing.Size(300, 56)
+        Me.XTrackBar.TabIndex = 4
+        '
+        'YTrackBar
+        '
+        Me.YTrackBar.Location = New System.Drawing.Point(372, 368)
+        Me.YTrackBar.Name = "YTrackBar"
+        Me.YTrackBar.Size = New System.Drawing.Size(300, 56)
+        Me.YTrackBar.TabIndex = 5
+        '
+        'XLabel
+        '
+        Me.XLabel.AutoSize = True
+        Me.XLabel.Location = New System.Drawing.Point(9, 344)
+        Me.XLabel.Name = "XLabel"
+        Me.XLabel.Size = New System.Drawing.Size(53, 16)
+        Me.XLabel.TabIndex = 6
+        Me.XLabel.Text = "X Slider"
+        '
+        'YLabel
+        '
+        Me.YLabel.AutoSize = True
+        Me.YLabel.Location = New System.Drawing.Point(369, 349)
+        Me.YLabel.Name = "YLabel"
+        Me.YLabel.Size = New System.Drawing.Size(54, 16)
+        Me.YLabel.TabIndex = 7
+        Me.YLabel.Text = "Y Slider"
+        '
         'EtchOSketchFrom
         '
         Me.AcceptButton = Me.DrawWaveformsButton
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.ExitButton
-        Me.ClientSize = New System.Drawing.Size(711, 457)
+        Me.ClientSize = New System.Drawing.Size(1339, 457)
         Me.ContextMenuStrip = Me.ContextMenu
+        Me.Controls.Add(Me.YLabel)
+        Me.Controls.Add(Me.XLabel)
+        Me.Controls.Add(Me.YTrackBar)
+        Me.Controls.Add(Me.XTrackBar)
         Me.Controls.Add(Me.TopMenu)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.DrawingPictureBox)
@@ -266,6 +308,8 @@ Partial Class EtchOSketchFrom
         Me.GroupBox1.ResumeLayout(False)
         Me.TopMenu.ResumeLayout(False)
         Me.TopMenu.PerformLayout()
+        CType(Me.XTrackBar, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.YTrackBar, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -297,4 +341,8 @@ Partial Class EtchOSketchFrom
     Friend WithEvents AboutToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents ToolTip As ToolTip
     Friend WithEvents ColorDialog As ColorDialog
+    Friend WithEvents XTrackBar As TrackBar
+    Friend WithEvents YTrackBar As TrackBar
+    Friend WithEvents XLabel As Label
+    Friend WithEvents YLabel As Label
 End Class

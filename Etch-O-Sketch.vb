@@ -1,16 +1,24 @@
-﻿'Rahiel Rodriguez
+﻿Option Strict On
+Option Explicit On
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement
+
+
+'Rahiel Rodriguez
 'RCET 0265
 'Spring 2024
 'Etch-O-Sketch
 'https://github.com/rahielrodriguez/Etch-O-Sketch.git
 
-Option Strict On
-Option Explicit On
 Public Class EtchOSketchFrom
     Sub SetDefaults()
         'Sets Initial Color of mouse drawing as black color.
         ForegroundColor(Color.Black, True)
-
+        'Sets Track Bars to draw all across the picture box
+        XTrackBar.Maximum = DrawingPictureBox.Width
+        YTrackBar.Maximum = DrawingPictureBox.Height
+        'Sets Values of the Track Bar Values to 0
+        XTrackBar.Value = 0
+        YTrackBar.Value = 0
     End Sub
     Function ForegroundColor(Optional newColor As Color = Nothing, Optional update As Boolean = False) As Color
         Static currentColor As Color
@@ -195,6 +203,29 @@ Public Class EtchOSketchFrom
         'Allows to draw only if left button of the mouse is being pressed
         Me.Text = $"({e.X}, {e.Y}) Button: {e.Button}"
     End Sub
+
+    Private Sub TrackBarX_Scroll(sender As Object, e As EventArgs) Handles XTrackBar.Scroll, YTrackBar.Scroll
+        ' Draw when either TrackBar changes
+        Dim xPosition As Integer = XTrackBar.Value
+        Dim yPosition As Integer = YTrackBar.Value
+        TrackBarDraw(xPosition, yPosition)
+    End Sub
+
+    Sub TrackBarDraw(newX As Integer, newY As Integer)
+        Dim g As Graphics = DrawingPictureBox.CreateGraphics
+        Dim pen As New Pen(ForegroundColor())
+        Static oldX As Integer, oldY As Integer
+
+        ' Draw a line as TrackBars move
+        g.DrawLine(pen, oldX, oldY, newX, newY)
+
+        ' Store current values for the next line segment
+        oldX = newX
+        oldY = newY
+
+        pen.Dispose()
+        g.Dispose()
+    End Sub
     Sub ShakeWhenClear()
         Dim shakeCount As Integer = 0
         'If clear is pressed, it will move the form for certain amount of times.
@@ -236,9 +267,4 @@ Public Class EtchOSketchFrom
         SetDefaults()
 
     End Sub
-
-    Private Sub SelectColorToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles SelectColorToolStripMenuItem1.Click
-
-    End Sub
-
 End Class
