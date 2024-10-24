@@ -1,7 +1,9 @@
 ﻿Option Strict On
 Option Explicit On
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
-
+Imports System.Threading.Thread
+Imports System.Windows.Forms.ComponentModel.Com2Interop
+Imports System.Runtime.InteropServices
 
 'Rahiel Rodriguez
 'RCET 0265
@@ -172,6 +174,59 @@ Public Class EtchOSketchFrom
         pen.Dispose()
         g.Dispose()
     End Sub
+    Sub DrawY_QYBoard()
+        'TODO
+        '[ ] Add AInput2 reading to control x
+        '[ ] Use AI2 to control x
+        Qy_ReadAnalogInPutA1()
+
+        Sleep(5)
+        Console.WriteLine(SerialPort.BytesToRead)
+        Dim data(SerialPort.BytesToRead) As Byte
+        SerialPort.Read(data, 0, SerialPort.BytesToRead)
+
+        Console.WriteLine($"High: {Hex(data(0))} | Jelly Beans: {data(0)}")
+        Console.WriteLine($"Low: {Hex(data(1))}")
+
+        Dim g As Graphics = DrawingPictureBox.CreateGraphics
+        Dim pen As New Pen(Color.Black)
+
+        'calculate the x scale factor
+        Dim xScale As Single = CSng(DrawingPictureBox.Height / 255)
+
+        'calculate the y scale factor and make up positive y
+        Dim yScale As Single = CSng(DrawingPictureBox.Height / 255)
+
+        Dim oldX#, oldY#, newX#, newY#
+        Dim angle#
+
+        newY = CDbl(data(0))
+
+        'apply the scale 
+        g.ScaleTransform(xScale, yScale)
+
+        ''set the origin to the y middle of the picture box
+        'g.TranslateTransform(0, yMax * -1)
+
+        'For newX = 0 To 360
+        '    'convert current X from degrees to radians
+        '    angle = (Math.PI / 180) * newX
+        '    'find current y 
+        '    newY = (yMax - 10) * Math.Tan(angle)
+        '    'draw current line segment
+        '    'If it cannot draw something from the waveform, skip and continue operation to eliminate errors.
+        Try
+            g.DrawLine(pen, CInt(oldX), CInt(oldY), CInt(newX), CInt(newY))
+        Catch ex As Exception
+        End Try
+        'store values for start of next line segment
+        oldX = newX
+        oldY = newY
+        'Next
+
+        pen.Dispose()
+        g.Dispose()
+    End Sub
     Sub MouseDraw(newX As Integer, newY As Integer, draw As Boolean)
         Dim g As Graphics = DrawingPictureBox.CreateGraphics
         Dim pen As New Pen(ForegroundColor())
@@ -189,20 +244,6 @@ Public Class EtchOSketchFrom
         g.Dispose()
     End Sub
 
-    Private Sub DrawingPictureBox_MouseMove(sender As Object, e As MouseEventArgs) Handles DrawingPictureBox.MouseMove
-        Me.Text = $"({e.X}, {e.Y}) Button: {e.Button}"
-        'Allows to draw and follow mouse movement.
-        If e.Button = MouseButtons.Left Then
-            MouseDraw(e.X, e.Y, True)
-        Else
-            MouseDraw(e.X, e.Y, False)
-        End If
-    End Sub
-
-    Private Sub DrawingPictureBox_MouseDown(sender As Object, e As MouseEventArgs) Handles DrawingPictureBox.MouseDown
-        'Allows to draw only if left button of the mouse is being pressed
-        Me.Text = $"({e.X}, {e.Y}) Button: {e.Button}"
-    End Sub
 
     Private Sub TrackBarX_Scroll(sender As Object, e As EventArgs) Handles XTrackBar.Scroll, YTrackBar.Scroll
         ' Draw when either TrackBar changes
@@ -266,5 +307,80 @@ Public Class EtchOSketchFrom
     Private Sub GraphicsForm_Load(sender As Object, e As EventArgs) Handles Me.Load
         SetDefaults()
 
+    End Sub
+
+    Private Sub SlidersRadioButton_CheckedChanged(sender As Object, e As EventArgs) Handles SlidersRadioButton.CheckedChanged
+        SerialPort.Close()
+
+    End Sub
+
+    Private Sub PotsRadioButton_CheckedChanged(sender As Object, e As EventArgs) Handles PotsRadioButton.CheckedChanged
+        XTrackBar.Enabled = False
+        YTrackBar.Enabled = False
+
+    End Sub
+
+    Function Qy_ReadAnalogInPutA1() As Byte()
+        Dim data(0) As Byte
+        data(0) = &B1010001
+        SerialPort.Write(data, 0, 1)
+        Return data
+    End Function
+
+    Function Qy_ReadAnalogInPutA2() As Byte()
+        Dim data(0) As Byte
+        data(0) = &B1010001
+        SerialPort.Write(data, 1, 1)
+        Return data
+    End Function
+
+    Function GetSettings() As Byte()
+        Dim data(0) As Byte
+        data(0) = &B11110000
+        SerialPort.Write(data, 0, 1)
+        Return data
+    End Function
+
+    Sub SerialConnect(portName As String)
+        SerialPort.Close()
+        SerialPort.PortName = portName
+        SerialPort.BaudRate = 9600
+        SerialPort.Open()
+
+    End Sub
+
+    ' Event Handlers ----------------------------------------------------------------------------
+
+    Private Sub SerialPort_DataReceived(sender As Object, e As IO.Ports.SerialDataReceivedEventArgs) 'Handles SerialPort.DataReceived
+        Dim data(SerialPort.BytesToRead) As Byte
+        SerialPort.Read(data, 0, SerialPort.BytesToRead)
+        For i = 0 To UBound(data)
+            Console.Write($"{Hex(data(i))}: ")
+            Console.WriteLine(Chr(data(i)))
+
+        Next
+    End Sub
+
+    Sub GetPorts()
+        'add all available ports to the port combobox
+        PortComboBox.Items.Clear()
+        For Each s As String In SerialPort.GetPortNames()
+            PortComboBox.Items.Add($"{s}")
+        Next
+
+        PortComboBox.SelectedIndex = 0
+    End Sub
+
+    Private Sub ComButton_Click(sender As Object, e As EventArgs) Handles ComButton.Click
+        'GetComPorts()
+        GetPorts()
+    End Sub
+
+    Private Sub PortComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles PortComboBox.SelectedIndexChanged
+        SerialConnect(Str(PortComboBox.SelectedItem))
+    End Sub
+
+    Private Sub SerialComExample_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        GetPorts()
     End Sub
 End Class
