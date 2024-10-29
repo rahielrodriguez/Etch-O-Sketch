@@ -27,6 +27,7 @@ Partial Class EtchOSketchFrom
         Me.ContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ComToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SelectColorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DrawWaveformsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -34,16 +35,21 @@ Partial Class EtchOSketchFrom
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.MouseRadioButton = New System.Windows.Forms.RadioButton()
         Me.ComButton = New System.Windows.Forms.Button()
+        Me.SlidersRadioButton = New System.Windows.Forms.RadioButton()
         Me.ExitButton = New System.Windows.Forms.Button()
+        Me.PotsRadioButton = New System.Windows.Forms.RadioButton()
         Me.ClearButton = New System.Windows.Forms.Button()
         Me.SelectColorButton = New System.Windows.Forms.Button()
         Me.DrawWaveformsButton = New System.Windows.Forms.Button()
         Me.TopMenu = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ComToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.SelectColorToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DrawWaveformsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ClearToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -55,11 +61,9 @@ Partial Class EtchOSketchFrom
         Me.XLabel = New System.Windows.Forms.Label()
         Me.YLabel = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.PotsRadioButton = New System.Windows.Forms.RadioButton()
-        Me.SlidersRadioButton = New System.Windows.Forms.RadioButton()
         Me.PortComboBox = New System.Windows.Forms.ComboBox()
         Me.SerialPort = New System.IO.Ports.SerialPort(Me.components)
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Timer = New System.Windows.Forms.Timer(Me.components)
         CType(Me.DrawingPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenu.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -67,7 +71,6 @@ Partial Class EtchOSketchFrom
         CType(Me.XTrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.YTrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
         Me.SuspendLayout()
         '
         'DrawingPictureBox
@@ -95,7 +98,7 @@ Partial Class EtchOSketchFrom
         '
         'FileToolStripMenuItem
         '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExitToolStripMenuItem})
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExitToolStripMenuItem, Me.ComToolStripMenuItem1})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(110, 24)
         Me.FileToolStripMenuItem.Text = "File"
@@ -103,8 +106,14 @@ Partial Class EtchOSketchFrom
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(116, 26)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(123, 26)
         Me.ExitToolStripMenuItem.Text = "Exit"
+        '
+        'ComToolStripMenuItem1
+        '
+        Me.ComToolStripMenuItem1.Name = "ComToolStripMenuItem1"
+        Me.ComToolStripMenuItem1.Size = New System.Drawing.Size(123, 26)
+        Me.ComToolStripMenuItem1.Text = "Com"
         '
         'EditToolStripMenuItem
         '
@@ -147,8 +156,11 @@ Partial Class EtchOSketchFrom
         'GroupBox1
         '
         Me.GroupBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox1.Controls.Add(Me.MouseRadioButton)
         Me.GroupBox1.Controls.Add(Me.ComButton)
+        Me.GroupBox1.Controls.Add(Me.SlidersRadioButton)
         Me.GroupBox1.Controls.Add(Me.ExitButton)
+        Me.GroupBox1.Controls.Add(Me.PotsRadioButton)
         Me.GroupBox1.Controls.Add(Me.ClearButton)
         Me.GroupBox1.Controls.Add(Me.SelectColorButton)
         Me.GroupBox1.Controls.Add(Me.DrawWaveformsButton)
@@ -157,6 +169,18 @@ Partial Class EtchOSketchFrom
         Me.GroupBox1.Size = New System.Drawing.Size(469, 201)
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
+        '
+        'MouseRadioButton
+        '
+        Me.MouseRadioButton.AutoSize = True
+        Me.MouseRadioButton.Checked = True
+        Me.MouseRadioButton.Location = New System.Drawing.Point(327, 106)
+        Me.MouseRadioButton.Name = "MouseRadioButton"
+        Me.MouseRadioButton.Size = New System.Drawing.Size(69, 20)
+        Me.MouseRadioButton.TabIndex = 12
+        Me.MouseRadioButton.TabStop = True
+        Me.MouseRadioButton.Text = "Mouse"
+        Me.MouseRadioButton.UseVisualStyleBackColor = True
         '
         'ComButton
         '
@@ -169,6 +193,16 @@ Partial Class EtchOSketchFrom
         Me.ToolTip.SetToolTip(Me.ComButton, "Closes the program")
         Me.ComButton.UseVisualStyleBackColor = True
         '
+        'SlidersRadioButton
+        '
+        Me.SlidersRadioButton.AutoSize = True
+        Me.SlidersRadioButton.Location = New System.Drawing.Point(327, 158)
+        Me.SlidersRadioButton.Name = "SlidersRadioButton"
+        Me.SlidersRadioButton.Size = New System.Drawing.Size(70, 20)
+        Me.SlidersRadioButton.TabIndex = 10
+        Me.SlidersRadioButton.Text = "Sliders"
+        Me.SlidersRadioButton.UseVisualStyleBackColor = True
+        '
         'ExitButton
         '
         Me.ExitButton.DialogResult = System.Windows.Forms.DialogResult.Cancel
@@ -179,6 +213,16 @@ Partial Class EtchOSketchFrom
         Me.ExitButton.Text = "E&xit"
         Me.ToolTip.SetToolTip(Me.ExitButton, "Closes the program")
         Me.ExitButton.UseVisualStyleBackColor = True
+        '
+        'PotsRadioButton
+        '
+        Me.PotsRadioButton.AutoSize = True
+        Me.PotsRadioButton.Location = New System.Drawing.Point(327, 132)
+        Me.PotsRadioButton.Name = "PotsRadioButton"
+        Me.PotsRadioButton.Size = New System.Drawing.Size(118, 20)
+        Me.PotsRadioButton.TabIndex = 11
+        Me.PotsRadioButton.Text = "Potentiometers"
+        Me.PotsRadioButton.UseVisualStyleBackColor = True
         '
         'ClearButton
         '
@@ -225,7 +269,7 @@ Partial Class EtchOSketchFrom
         '
         'FileToolStripMenuItem1
         '
-        Me.FileToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExitToolStripMenuItem1})
+        Me.FileToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExitToolStripMenuItem1, Me.ComToolStripMenuItem})
         Me.FileToolStripMenuItem1.Name = "FileToolStripMenuItem1"
         Me.FileToolStripMenuItem1.Size = New System.Drawing.Size(46, 24)
         Me.FileToolStripMenuItem1.Text = "File"
@@ -233,8 +277,14 @@ Partial Class EtchOSketchFrom
         'ExitToolStripMenuItem1
         '
         Me.ExitToolStripMenuItem1.Name = "ExitToolStripMenuItem1"
-        Me.ExitToolStripMenuItem1.Size = New System.Drawing.Size(116, 26)
+        Me.ExitToolStripMenuItem1.Size = New System.Drawing.Size(123, 26)
         Me.ExitToolStripMenuItem1.Text = "Exit"
+        '
+        'ComToolStripMenuItem
+        '
+        Me.ComToolStripMenuItem.Name = "ComToolStripMenuItem"
+        Me.ComToolStripMenuItem.Size = New System.Drawing.Size(123, 26)
+        Me.ComToolStripMenuItem.Text = "Com"
         '
         'EditToolStripMenuItem1
         '
@@ -245,9 +295,16 @@ Partial Class EtchOSketchFrom
         '
         'SelectColorToolStripMenuItem1
         '
+        Me.SelectColorToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SToolStripMenuItem})
         Me.SelectColorToolStripMenuItem1.Name = "SelectColorToolStripMenuItem1"
         Me.SelectColorToolStripMenuItem1.Size = New System.Drawing.Size(205, 26)
         Me.SelectColorToolStripMenuItem1.Text = "Select Color"
+        '
+        'SToolStripMenuItem
+        '
+        Me.SToolStripMenuItem.Name = "SToolStripMenuItem"
+        Me.SToolStripMenuItem.Size = New System.Drawing.Size(100, 26)
+        Me.SToolStripMenuItem.Text = "S"
         '
         'DrawWaveformsToolStripMenuItem1
         '
@@ -319,46 +376,17 @@ Partial Class EtchOSketchFrom
         Me.GroupBox2.TabIndex = 8
         Me.GroupBox2.TabStop = False
         '
-        'PotsRadioButton
-        '
-        Me.PotsRadioButton.AutoSize = True
-        Me.PotsRadioButton.Location = New System.Drawing.Point(6, 59)
-        Me.PotsRadioButton.Name = "PotsRadioButton"
-        Me.PotsRadioButton.Size = New System.Drawing.Size(118, 20)
-        Me.PotsRadioButton.TabIndex = 11
-        Me.PotsRadioButton.Text = "Potentiometers"
-        Me.PotsRadioButton.UseVisualStyleBackColor = True
-        '
-        'SlidersRadioButton
-        '
-        Me.SlidersRadioButton.AutoSize = True
-        Me.SlidersRadioButton.Checked = True
-        Me.SlidersRadioButton.Location = New System.Drawing.Point(6, 33)
-        Me.SlidersRadioButton.Name = "SlidersRadioButton"
-        Me.SlidersRadioButton.Size = New System.Drawing.Size(70, 20)
-        Me.SlidersRadioButton.TabIndex = 10
-        Me.SlidersRadioButton.TabStop = True
-        Me.SlidersRadioButton.Text = "Sliders"
-        Me.SlidersRadioButton.UseVisualStyleBackColor = True
-        '
         'PortComboBox
         '
+        Me.PortComboBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.PortComboBox.FormattingEnabled = True
-        Me.PortComboBox.Location = New System.Drawing.Point(12, 305)
+        Me.PortComboBox.Location = New System.Drawing.Point(24, 305)
         Me.PortComboBox.Name = "PortComboBox"
         Me.PortComboBox.Size = New System.Drawing.Size(300, 24)
         Me.PortComboBox.TabIndex = 9
         '
-        'GroupBox3
+        'Timer
         '
-        Me.GroupBox3.Controls.Add(Me.SlidersRadioButton)
-        Me.GroupBox3.Controls.Add(Me.PotsRadioButton)
-        Me.GroupBox3.Location = New System.Drawing.Point(336, 437)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(131, 100)
-        Me.GroupBox3.TabIndex = 12
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "GroupBox3"
         '
         'EtchOSketchFrom
         '
@@ -368,7 +396,6 @@ Partial Class EtchOSketchFrom
         Me.CancelButton = Me.ExitButton
         Me.ClientSize = New System.Drawing.Size(966, 549)
         Me.ContextMenuStrip = Me.ContextMenu
-        Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.PortComboBox)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.TopMenu)
@@ -376,18 +403,18 @@ Partial Class EtchOSketchFrom
         Me.Controls.Add(Me.DrawingPictureBox)
         Me.MainMenuStrip = Me.TopMenu
         Me.Name = "EtchOSketchFrom"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Etch-O-Sketch"
         CType(Me.DrawingPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ContextMenu.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.TopMenu.ResumeLayout(False)
         Me.TopMenu.PerformLayout()
         CType(Me.XTrackBar, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.YTrackBar, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -429,5 +456,9 @@ Partial Class EtchOSketchFrom
     Friend WithEvents SlidersRadioButton As RadioButton
     Friend WithEvents SerialPort As IO.Ports.SerialPort
     Friend WithEvents ComButton As Button
-    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents MouseRadioButton As RadioButton
+    Friend WithEvents Timer As Timer
+    Friend WithEvents ComToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ComToolStripMenuItem1 As ToolStripMenuItem
 End Class
